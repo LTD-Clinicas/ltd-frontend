@@ -20,8 +20,8 @@ export default function Login() {
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                         <img
                             className="mx-auto"
-                            width={200}
-                            src="https://vmxi.com.br/img/login.png?color=indigo&shade=600"
+                            width={250}
+                            src="https://logodownload.org/wp-content/uploads/2014/12/estacio-logo-1.png"
                             alt="Tela de login"
                         />
                         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -32,7 +32,7 @@ export default function Login() {
                     <form className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6">
                         <section>
                             <Label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                                Email ou Matrícula
+                                Email
                             </Label>
 
                             <Input
