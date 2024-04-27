@@ -1,12 +1,20 @@
-import React, { useState } from "react"
+import { 
+    ClinicasList 
+} from "@/components/pages/clinicas";
 
+import {
+    NavBar
+} from "@/components/navigation/nav";
 
 export default function Home() {
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center p-24">
-            <h1 className="text-3xl font-bold underline">PAGINA DE LOGIN</h1>
-            (EM DESENVOLVIMENTO)
-            <a className="font-bold text-2xl" href="/login">Login</a>
-        </div>
+        <main
+            className="px-14 py-4"
+        >
+            <NavBar/>
+            <div className={"h-screen flex flex-col items-center justify-around"}>
+                <ClinicasList/>
+            </div>
+        </main>
     )
 }
