@@ -9,10 +9,10 @@ import {
 export default function Home() {
     return (
         <main
-            className="px-14 py-4"
+            className="px-14 py-4 h-screen"
         >
             <NavBar/>
-            <div className={"h-screen flex flex-col items-center justify-around"}>
+            <div className={"flex items-center justify-around"}>
                 <ClinicasList/>
             </div>
         </main>
