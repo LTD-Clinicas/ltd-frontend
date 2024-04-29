@@ -88,7 +88,7 @@ export default function Example() {
         alt="Ícone"
         className="absolute top-0 left-0 -mt-12 -ml-4 h-40 w-40"
       />
-       <a href="#" className="absolute top-0 right-0 m-4 text-gray-700">Login</a>
+       <a href="./login" className="absolute top-0 right-0 m-4 text-gray-700">Login</a>
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Products</h2>
 
