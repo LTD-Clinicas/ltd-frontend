@@ -35,7 +35,7 @@ const products = [
     href: '#',
     price: '',
     imageSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5zLiBMSllXGveR6zZeuzJd3X8ujGGKeJ2DkNiQ9phvQ&s',
-    imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
+    imageAlt: '',
   },
   {
     id: 4,
@@ -43,7 +43,7 @@ const products = [
     href: '#',
     price: '',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-    imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
+    imageAlt: '',
   },
   {
     id: 5,
@@ -51,7 +51,7 @@ const products = [
     href: '#',
     price: '',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-    imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
+    imageAlt: '',
   },
   {
     id: 6,
@@ -59,7 +59,7 @@ const products = [
     href: '#',
     price: '',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-    imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
+    imageAlt: '',
   },
   {
     id: 7,
@@ -67,7 +67,7 @@ const products = [
     href: '#',
     price: '',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-    imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
+    imageAlt: '',
   },
   {
     id: 8,
@@ -75,7 +75,7 @@ const products = [
     href: '#',
     price: '',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-    imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
+    imageAlt: '',
   },
   // More products...
 ]
@@ -88,7 +88,7 @@ export default function Example() {
         alt="Ícone"
         className="absolute top-0 left-0 -mt-12 -ml-4 h-40 w-40"
       />
-       <p className="absolute top-0 right-0 m-4 text-gray-700">Login</p>
+       <a href="#" className="absolute top-0 right-0 m-4 text-gray-700">Login</a>
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Products</h2>
 
