@@ -35,7 +35,7 @@ const products = [
     href: '#',
     price: '',
     imageSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5zLiBMSllXGveR6zZeuzJd3X8ujGGKeJ2DkNiQ9phvQ&s',
-    imageAlt: '',
+    imageAlt: 'logo clinica enfermagem',
   },
   {
     id: 4,
