@@ -15,15 +15,15 @@
 const products = [
   {
     id: 1,
-    name: 'clinica 1',
-    href: '#',
+    name: 'Psicologia',
+    href: './login',
     price: '',
     imageSrc: 'https://cdn-icons-png.flaticon.com/512/3367/3367695.png',
     imageAlt: 'icone da clinica de psicologia.',
   },
   {
     id: 2,
-    name: 'clinica 2',
+    name: 'Direito',
     href: '#',
     price: '',
     imageSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWgqQ6OyRPiEUR9Ct0ed56MtBeYLjPpoJaJADlh1xE-w&s',
@@ -31,7 +31,7 @@ const products = [
   },
   {
     id: 3,
-    name: 'clinica 3',
+    name: 'Fisioterapia',
     href: '#',
     price: '',
     imageSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5zLiBMSllXGveR6zZeuzJd3X8ujGGKeJ2DkNiQ9phvQ&s',
@@ -39,10 +39,10 @@ const products = [
   },
   {
     id: 4,
-    name: 'cinicla 4',
+    name: 'Nutrição',
     href: '#',
     price: '',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
+    imageSrc: 'https://seeklogo.com/images/S/S__mbolo_de_Nutri____o-logo-31DFE3FB28-seeklogo.com.png',
     imageAlt: '',
   },
   {
