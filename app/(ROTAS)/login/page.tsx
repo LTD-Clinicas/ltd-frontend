@@ -1,20 +1,71 @@
 "use client";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { useState } from "react";
-import { HiOutlineUserCircle } from "react-icons/hi";
-import Link from "next/link"
+import { 
+    Input
+} from "@/components/ui/input";
+
+import { 
+    Label
+} from "@/components/ui/label";
+
+import { 
+    Button
+} from "@/components/ui/button";
+
+import { 
+    Card, 
+    CardContent 
+} from "@/components/ui/card";
+
+import { 
+    useState 
+} from "react";
+
+import { 
+    HiOutlineUserCircle 
+} from "react-icons/hi";
+
+import {
+    useRouter
+} from "next/navigation"
 
 export default function Login() {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const router = useRouter()
+    
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    const handleLogin = () => {
-        console.log(`Logged in as ${email}`);
+    const BASE_URL = 'http://18.206.68.106:8080/home';
+
+    const handleLogin = async () => {
+        
+        // setLoading(true);
+        
+        try {
+            const response = await fetch(`${BASE_URL}/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    username: username,
+                    password: password,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao fazer login');
+            }
+
+            router.push("/inicio")
+            // setLoading(!loading)
+            
+        } catch (error) {
+            console.error('Erro ao fazer login:', error);
+            throw error;
+        }
     }
-
+    
 return (
         <main className={"h-screen w-full p-12"}>
             <Card className="h-fit w-fit px-0 md:px-16 pt-3 mx-auto">
@@ -30,17 +81,18 @@ return (
                     <form className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6">
                         <section>
                             <Label
-                                htmlFor="email"
+                                htmlFor="username"
                                 className="block text-sm font-medium leading-6 text-gray-900"
                             >
                                 Email ou Matrícula
                             </Label>
 
                             <Input
-                                onChange={(e) => setEmail(e.target.value)}
-                                id="login"
-                                name="login"
+                                onChange={(e) => setUsername(e.target.value)}
+                                id="username"
+                                name="username"
                                 type="text"
+                                value={username}
                                 required
                                 className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                             />
@@ -63,7 +115,7 @@ return (
                                 id="password"
                                 name="password"
                                 type="password"
-                                autoComplete="current-password"
+                                value={password}
                                 required
                                 className="block w-full mt-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-400 sm:text-sm sm:leading-6"
                             />
