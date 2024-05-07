@@ -17,9 +17,9 @@ const navigation = [
   { name: 'exemplo', href: '#', current: false },
 ]
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Seu perfil', href: '#' },
+  { name: 'configurações', href: '#' },
+  { name: 'sair', href: '#' },
 ]
 
 function classNames(...classes) {
@@ -37,6 +37,9 @@ export default function Example() {
         <body class="h-full">
         ```
       */}
+      <div>
+
+      </div>
       <div className="min-h-full">
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
@@ -48,7 +51,7 @@ export default function Example() {
                       <img
                         className="h-40 w-40"
                         src="https://logodownload.org/wp-content/uploads/2014/12/estacio-logo-0.png"
-                        alt="Your Company"
+                        alt="logo estacio"
                       />
                     </div>
                     <div className="hidden md:block">
@@ -191,7 +194,7 @@ export default function Example() {
 
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">teste</h1>
           </div>
         </header>
         <main>
@@ -201,3 +204,5 @@ export default function Example() {
     </>
   )
 }
+
+
