@@ -15,7 +15,7 @@ export default function Login() {
 
     return (
         <main>
-            <Card className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+            <Card className=" flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <CardContent>
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                         <img

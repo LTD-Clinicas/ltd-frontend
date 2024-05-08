@@ -9,11 +9,13 @@ export default function SignUp() {
     const [nomeCompleto, setNomeCompleto] = useState("")
     const [email, setEmail] = useState("")
     const [cpf, setCpf] = useState("")
+    const [dataNascimento, setDataNascimento] = useState("")
+    const [tipoUsuario, setTipoUsuario] = useState("")
     const [senha, setSenha] = useState("")
     const [confirmaSenha, setConfirmaSenha] = useState("")
 
     const handleSignUp = () => {
-        console.log("Cadastro: Nome Completo: " + nomeCompleto + ", Email: " + email + ", CPF: " + cpf + ", Senha: " + senha)
+        console.log("Cadastro: Nome Completo: " + nomeCompleto + ", Email: " + email + ", CPF: " + cpf + ", Data de Nascimento: " + dataNascimento + ", Tipo de usuário: " + tipoUsuario + ", Senha: " + senha)
     }
 
     return (
@@ -22,7 +24,7 @@ export default function SignUp() {
                 <CardContent>
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                            Cadastro do Professor
+                            Registro de Usuário
                         </h2>
                     </div>
 
@@ -68,6 +70,32 @@ export default function SignUp() {
                                 className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                             />
 
+                            <Label htmlFor="dataNascimento" className="block text-sm font-medium leading-6 text-gray-900">
+                                Data de Nascimento
+                            </Label>
+
+                            <Input
+                                onChange={(e) => setDataNascimento(e.target.value)}
+                                id="dataNascimento"
+                                name="dataNascimento"
+                                type="date"
+                                className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                            />
+
+                            <Label htmlFor="tipoUsuario" className="block text-sm font-medium leading-6 text-gray-900">
+                                Tipo de Usuário
+                            </Label>
+
+                            <Input
+                                onChange={(e) => setTipoUsuario(e.target.value)}
+                                id="tipoUsuario"
+                                name="tipoUsuario"
+                                //type="text"
+                                autoComplete="tipo"
+                                required    
+                                className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                            />
+
                             <Label htmlFor="senha" className="block text-sm font-medium leading-6 text-gray-900">
                                 Senha
                             </Label>
@@ -103,12 +131,6 @@ export default function SignUp() {
                         >
                             Criar Conta
                         </Button>
-                        <span className="mt-10 text-center text-sm text-gray-900">
-                            Já possui cadastro?{' '}
-                            <a href="#" className="font-semibold leading-6 text-blue-400 hover:text-indigo-500">
-                                Clique aqui
-                            </a>
-                        </span>
                     </form>
                 </CardContent>
             </Card>
