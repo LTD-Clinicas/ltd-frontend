@@ -203,6 +203,9 @@ export default function Example() {
         </header>
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+            <div>
+              <p className="text-2xl font-bold tracking-tight">Turno: </p>
+            </div>
             <Calendar
               mode="single"
               selected={date}
