@@ -1,27 +1,27 @@
 "use client";
-import { 
+import {
     Input
 } from "@/components/ui/input";
 
-import { 
+import {
     Label
 } from "@/components/ui/label";
 
-import { 
+import {
     Button
 } from "@/components/ui/button";
 
-import { 
-    Card, 
-    CardContent 
+import {
+    Card,
+    CardContent
 } from "@/components/ui/card";
 
-import { 
-    useState 
+import {
+    useState
 } from "react";
 
-import { 
-    HiOutlineUserCircle 
+import {
+    HiOutlineUserCircle
 } from "react-icons/hi";
 
 import {
@@ -30,7 +30,7 @@ import {
 
 export default function Login() {
     const router = useRouter()
-    
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -38,16 +38,16 @@ export default function Login() {
     const BASE_URL = 'http://18.206.68.106:8080/home';
 
     const handleLogin = async () => {
-        
+
         // setLoading(true);
-        
+
         try {
             const response = await fetch(`${BASE_URL}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ 
+                body: JSON.stringify({
                     username: username,
                     password: password,
                 }),
@@ -59,14 +59,14 @@ export default function Login() {
 
             router.push("/inicio")
             // setLoading(!loading)
-            
+
         } catch (error) {
             console.error('Erro ao fazer login:', error);
             throw error;
         }
     }
-    
-return (
+
+    return (
         <main className={"h-screen w-full p-12"}>
             <Card className="h-fit w-fit px-0 md:px-16 pt-3 mx-auto">
                 <CardContent>
@@ -103,10 +103,10 @@ return (
                             >
                                 Senha
                                 <a
-                                href="#"
-                                className="text-sm font-semibold text-blue-400 hover:text-blue-500"
+                                    href="#"
+                                    className="text-sm font-semibold text-blue-400 hover:text-blue-500"
                                 >
-                                Esqueceu sua senha?
+                                    Esqueceu sua senha?
                                 </a>
                             </Label>
 
@@ -126,7 +126,7 @@ return (
                             type="button"
                             className="flex w-full justify-center rounded-md bg-green-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
                         >
-                            Entrar  
+                            Entrar
                         </Button>
 
                         <span className="mt-10 text-center text-sm text-gray-900">

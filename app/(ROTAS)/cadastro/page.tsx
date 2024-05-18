@@ -14,7 +14,7 @@ export default function Cadastro () {
                             Cadastrar Usuário
                         </h2>
                     </div>
-                    
+
                 </CardContent>
             </Card>
         </main>

@@ -16,16 +16,16 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-    children,
-}: Readonly<{
+                                       children,
+                                   }: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
         <html lang="pt-br">
-            <body className={inter.className}>
-                {/*<NavBar/>*/}
-                {children}
-            </body>
+        <body className={inter.className}>
+        {/*<NavBar/>*/}
+        {children}
+        </body>
         </html>
     );
 }
