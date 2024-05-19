@@ -30,53 +30,47 @@ function classNames(...classes) {
 
 export default function Example() {
   const [date, setDate] = React.useState<Date | undefined>(new Date())
-  const [consultationText, setConsultationText] = useState("Marque o dia e o mês que deseja realizar a sua consulta!");
-  const originalConsultationText = "Marque o dia e o mês que deseja realizar a sua consulta!";
+  const [consultationText, setConsultationText] = useState("Marque o dia e o mês no calendario que deseja realizar a sua consulta!");
+  const originalConsultationText = "Marque o dia e o mês no calendario que deseja realizar a sua consulta!";
   const [turno, setTurno] = useState("");
   const [horario, setHorario] = useState("");
   const [observacao, setObservacao] = useState("");
+  const [isConsultationMarked, setIsConsultationMarked] = useState(false);
 
   const handleConsultationClick = () => {
-    if (consultationText === originalConsultationText) {
+    if (date && turno && horario) {
+      const formattedDate = `${date.getDate()} do mês ${date.toLocaleString('default', { month: 'long' })}`
+      const alertMessage = `Sua consulta foi marcada para o dia ${formattedDate} às ${horario} horas!`;
+      alert(alertMessage);
+      setIsConsultationMarked(true);
       setConsultationText("Consulta marcada!");
-  }  else {
-      setTurno("");
-      setHorario("");
-      setObservacao("");
-      setConsultationText(originalConsultationText);
-  }
-};
+    } else {
+      alert("Por favor, selecione todos os campos antes de marcar a consulta.");
+    }
+  };
 
   const handleUndoConsultationClick = () => {
-    setConsultationText(originalConsultationText);
+    setIsConsultationMarked(false);
     setTurno("");
     setHorario("");
     setObservacao("");
+    setConsultationText(originalConsultationText);
   };
 
-  const  handleTurnoChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleTurnoChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTurno(event.target.value);
   };
+
   const handleHorarioChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setHorario(event.target.value);
   };
+
   const handleObservationChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setObservacao(event.target.value);
   };
   
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
-      <div>
-      
-      </div>
       <div className="min-h-full">
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
@@ -236,7 +230,8 @@ export default function Example() {
         </header>
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            <div className="flex items-center space-x-4">
+            {!isConsultationMarked ? (
+              <div className="flex items-center space-x-4">
                 <div>
                   <Calendar
                     mode="single"
@@ -246,81 +241,85 @@ export default function Example() {
                   />
                 </div>
                 <div>
-                  <p className="ml-16 text-lg font medium">
-                    {consultationText}
+                  <p className="ml-16 text-lg font-medium">
+                    {originalConsultationText}
                   </p>
-                  {consultationText === "Consulta marcada!" && (
-                    <div className="mt-4 space-y-4">
-                       <div>
-                          <label htmlFor="turno" className="block text-sm font-medium text-gray-700">
-                            Turno
-                          </label>
-                          <select
-                             id="turno"
-                             name="turno"
-                             onChange={handleTurnoChange}
-                             value={turno}
-                             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
-                          >
-                             <option value="">Selecione o turno</option>
-                             <option value="Manhã">Manhã</option>
-                             <option value="Tarde">Tarde</option>
-                             <option value="Noite">Noite</option>
-                          </select>
-                       </div>
-                       <div>
-                         <label htmlFor="horario" className="block text-sm font-medium text-gray-700"> 
-                            Horário
-                         </label>
-                         <select
-                            id="horario"
-                            name="horario"  
-                            onChange={handleHorarioChange}
-                            value={horario} 
-                            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
-                         >
-                           <option value="">Selecione o horário</option>
-                           <option value="8:00">8:00</option>
-                           <option value="10:00">10:00</option>
-                           <option value="14:00">14:00</option>
-                         </select>
-                       </div>
-                       <div>
-                         <label htmlFor="observacao" className="block text-sm font-medium text-gray-700">
-                            Observação
-                         </label>
-                         <textarea
-                           id="observacao"
-                           name="observacao"
-                           rows={3}
-                           value={observacao}
-                           onChange={handleObservationChange}
-                           className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
-                         ></textarea>
-                       </div>
-                   </div>
-                  )}
-               </div>
-              </div> 
+                  <div className="mt-4 space-y-4">
+                    <div>
+                      <label htmlFor="turno" className="block text-sm font-medium text-gray-700">
+                        Turno
+                      </label>
+                      <select
+                        id="turno"
+                        name="turno"
+                        onChange={handleTurnoChange}
+                        value={turno}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                      >
+                        <option value="">Selecione o turno</option>
+                        <option value="Manhã">Manhã</option>
+                        <option value="Tarde">Tarde</option>
+                        <option value="Noite">Noite</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="horario" className="block text-sm font-medium text-gray-700">
+                        Horário
+                      </label>
+                      <select
+                        id="horario"
+                        name="horario"
+                        onChange={handleHorarioChange}
+                        value={horario}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                      >
+                        <option value="">Selecione o horário</option>
+                        <option value="8:00">8:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="14:00">14:00</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="observacao" className="block text-sm font-medium text-gray-700">
+                        Observação
+                      </label>
+                      <textarea
+                        id="observacao"
+                        name="observacao"
+                        rows={3}
+                        value={observacao}
+                        onChange={handleObservationChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <p className="mt-4 text-lg font-medium text-green-500">
+                {consultationText}
+              </p>
+            )}
             <div className="mt-4 flex justify-center space-x-4">
-            <button
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-              onClick={handleConsultationClick}
-              >
-                Marcar Consulta
-            </button>
-            <button
-              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-              onClick={handleUndoConsultationClick}
-              >
-                Desfazer consulta
-            </button>
-           </div>
+              {!isConsultationMarked ? (
+                <button
+                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  onClick={handleConsultationClick}
+                >
+                  Marcar Consulta
+                </button>
+              ) : (
+                <button
+                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                  onClick={handleUndoConsultationClick}
+                >
+                  Desfazer consulta
+                </button>
+              )}
+            </div>
           </div>
         </main>
       </div>
     </>
   )
 }
-
-
