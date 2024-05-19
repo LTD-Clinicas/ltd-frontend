@@ -38,12 +38,23 @@ export default function Example() {
   const [isConsultationMarked, setIsConsultationMarked] = useState(false);
 
   const handleConsultationClick = () => {
-    if (date && turno && horario) {
-      const formattedDate = `${date.getDate()} do mês ${date.toLocaleString('default', { month: 'long' })}`
+    if (!date) {
+      alert("Por favor, selecione uma data.");
+      return;
+    }
+
+    const dayOfWeek = date.getDay();
+    if (dayOfWeek === 0 || dayOfWeek === 6) {
+      alert("Consultas não podem ser marcadas aos sábados e domingos.");
+      return;
+    }
+
+    if (turno && horario) {
+      const formattedDate = `${date.getDate()} do mês ${date.toLocaleString('default', { month: 'long' })}`;
       const alertMessage = `Sua consulta foi marcada para o dia ${formattedDate} às ${horario} horas!`;
       alert(alertMessage);
       setIsConsultationMarked(true);
-      setConsultationText("Consulta marcada!");
+      setConsultationText(`Sua consulta foi marcada para o dia ${formattedDate} às ${horario} horas ${turno}! Por favor, compareça no dia marcado.`);
     } else {
       alert("Por favor, selecione todos os campos antes de marcar a consulta.");
     }
@@ -274,9 +285,24 @@ export default function Example() {
                         className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
                       >
                         <option value="">Selecione o horário</option>
-                        <option value="8:00">8:00</option>
-                        <option value="10:00">10:00</option>
-                        <option value="14:00">14:00</option>
+                        {turno === "Manhã" && (
+                          <>
+                            <option value="8:00">8:00 ás 9:00 / 40 vagas</option>
+                            <option value="10:00">10:00 ás 11:00/ 40 vagas</option>
+                          </>
+                        )}
+                        {turno === "Tarde" && (
+                          <>
+                            <option value="14:00">14:00 ás 15:00 / 40 vagas</option>
+                            <option value="16:00">16:00 ás 17:00 / 40 vagas</option>
+                          </>
+                        )}
+                        {turno === "Noite" && (
+                           <>
+                             <option value="18:00">18:00 ás 19:00 / 40 vagas</option>
+                             <option value="20:00">20:00 ás 21:00 / 40 vagas</option>
+                           </>
+                        )}
                       </select>
                     </div>
                     <div>
@@ -296,7 +322,7 @@ export default function Example() {
                 </div>
               </div>
             ) : (
-              <p className="mt-4 text-lg font-medium text-green-500">
+              <p className="mt-4 text-lg font-medium text-green-500" style={{ marginLeft: '85px' }}>
                 {consultationText}
               </p>
             )}
