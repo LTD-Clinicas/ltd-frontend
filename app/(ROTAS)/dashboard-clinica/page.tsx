@@ -30,6 +30,39 @@ function classNames(...classes) {
 
 export default function Example() {
   const [date, setDate] = React.useState<Date | undefined>(new Date())
+  const [consultationText, setConsultationText] = useState("Marque o dia e o mês que deseja realizar a sua consulta!");
+  const originalConsultationText = "Marque o dia e o mês que deseja realizar a sua consulta!";
+  const [turno, setTurno] = useState("");
+  const [horario, setHorario] = useState("");
+  const [observacao, setObservacao] = useState("");
+
+  const handleConsultationClick = () => {
+    if (consultationText === originalConsultationText) {
+      setConsultationText("Consulta marcada!");
+  }  else {
+      setTurno("");
+      setHorario("");
+      setObservacao("");
+      setConsultationText(originalConsultationText);
+  }
+};
+
+  const handleUndoConsultationClick = () => {
+    setConsultationText(originalConsultationText);
+    setTurno("");
+    setHorario("");
+    setObservacao("");
+  };
+
+  const  handleTurnoChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setTurno(event.target.value);
+  };
+  const handleHorarioChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setHorario(event.target.value);
+  };
+  const handleObservationChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setObservacao(event.target.value);
+  };
   
   return (
     <>
@@ -198,30 +231,87 @@ export default function Example() {
 
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Agenda</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Consulta</h1>
           </div>
         </header>
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            <div>
-              <p className="text-2xl font-bold tracking-tight">Turno: </p>
-            </div>
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={setDate}
-              className="rounded-md border"
-            />
+            <div className="flex items-center space-x-4">
+                <div>
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    onSelect={setDate}
+                    className="rounded-md border"
+                  />
+                </div>
+                <div>
+                  <p className="ml-16 text-lg font medium">
+                    {consultationText}
+                  </p>
+                  {consultationText === "Consulta marcada!" && (
+                    <div className="mt-4 space-y-4">
+                       <div>
+                          <label htmlFor="turno" className="block text-sm font-medium text-gray-700">
+                            Turno
+                          </label>
+                          <select
+                             id="turno"
+                             name="turno"
+                             onChange={handleTurnoChange}
+                             value={turno}
+                             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                          >
+                             <option value="">Selecione o turno</option>
+                             <option value="Manhã">Manhã</option>
+                             <option value="Tarde">Tarde</option>
+                             <option value="Noite">Noite</option>
+                          </select>
+                       </div>
+                       <div>
+                         <label htmlFor="horario" className="block text-sm font-medium text-gray-700"> 
+                            Horário
+                         </label>
+                         <select
+                            id="horario"
+                            name="horario"  
+                            onChange={handleHorarioChange}
+                            value={horario} 
+                            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                         >
+                           <option value="">Selecione o horário</option>
+                           <option value="8:00">8:00</option>
+                           <option value="10:00">10:00</option>
+                           <option value="14:00">14:00</option>
+                         </select>
+                       </div>
+                       <div>
+                         <label htmlFor="observacao" className="block text-sm font-medium text-gray-700">
+                            Observação
+                         </label>
+                         <textarea
+                           id="observacao"
+                           name="observacao"
+                           rows={3}
+                           value={observacao}
+                           onChange={handleObservationChange}
+                           className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                         ></textarea>
+                       </div>
+                   </div>
+                  )}
+               </div>
+              </div> 
             <div className="mt-4 flex justify-center space-x-4">
             <button
               className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-              onClick={() => {console.log("Consulta marcada!");}}
+              onClick={handleConsultationClick}
               >
                 Marcar Consulta
             </button>
             <button
               className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-              onClick={() => {console.log("Consulta desfeita!");}}
+              onClick={handleUndoConsultationClick}
               >
                 Desfazer consulta
             </button>
