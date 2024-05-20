@@ -13,12 +13,8 @@ const user = {
   email: 'emailexemplo@gmail.com',
 }
 const navigation = [
+  { name: 'Cadastro do Coordenador', href: '#', current: true },
   { name: 'Perfil', href: '#', current: false },
-  { name: 'Registro de Usuário', href: '#', current: true },
-]
-const userNavigation = [
-  { name: 'Seu perfil', href: '#' },
-  { name: 'Sair', href: '#' },
 ]
 
 function classNames(...classes: string[]) {
@@ -31,14 +27,38 @@ export default function Example() {
     const [email, setEmail] = useState("")
     const [cpf, setCpf] = useState("")
     const [dataNascimento, setDataNascimento] = useState("")
-    const [tipoUsuario, setTipoUsuario] = useState("")
     const [clinica, setClinica] = useState("")
     const [senha, setSenha] = useState("")
     const [confirmaSenha, setConfirmaSenha] = useState("")
 
     const handleSignUp = () => {
-        console.log("Cadastro: Nome Completo: " + nomeCompleto + ", Email: " + email + ", CPF: " + cpf + ", Data de Nascimento: " + dataNascimento + ", Tipo de usuário: " + tipoUsuario + ", Clínica do usuário: " + clinica + ", Senha: " + senha)
+      const formData = {
+        nomeCompleto,
+        email,
+        cpf,
+        dataNascimento,
+        clinica,
+        senha
     }
+
+    fetch('URL DO MEU ENDPOINT', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Cadastro realizado com sucesso!');
+      } else {
+        console.error('Ocorreu um erro ao cadastrar.');
+      }
+    })
+    .catch(error => {
+      console.error('Ocorreu um erro ao realizar a requisição:', error);
+    });
+  }
 
   return (
     <>
@@ -96,23 +116,6 @@ export default function Example() {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            {userNavigation.map((item) => (
-                              <Menu.Item key={item.name}>
-                                {({ active }) => (
-                                  <a
-                                    href={item.href}
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700'
-                                    )}
-                                  >
-                                    {item.name}
-                                  </a>
-                                )}
-                              </Menu.Item>
-                            ))}
-                          </Menu.Items>
                         </Transition>
                       </Menu>
                     </div>
@@ -131,7 +134,6 @@ export default function Example() {
                   </div>
                 </div>
               </div>
-
               <Disclosure.Panel className="md:hidden">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                   {navigation.map((item) => (
@@ -164,18 +166,6 @@ export default function Example() {
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
                   </div>
-                  <div className="mt-3 space-y-1 px-2">
-                    {userNavigation.map((item) => (
-                      <Disclosure.Button
-                        key={item.name}
-                        as="a"
-                        href={item.href}
-                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                      >
-                        {item.name}
-                      </Disclosure.Button>
-                    ))}
-                  </div>
                 </div>
               </Disclosure.Panel>
             </>
@@ -188,7 +178,6 @@ export default function Example() {
           </div>
         </header>
           <main>
-            <Card>
                 <CardContent>
                     <form className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6">
                         <section>
@@ -244,20 +233,6 @@ export default function Example() {
                                 className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                             />
 
-                            <Label htmlFor="tipoUsuario" className="block text-sm font-medium leading-6 text-gray-900">
-                                Tipo de Usuário
-                            </Label>
-
-                            <Input
-                                onChange={(e) => setTipoUsuario(e.target.value)}
-                                id="tipoUsuario"
-                                name="tipoUsuario"
-                                type="text"
-                                autoComplete="tipo"
-                                required    
-                                className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
-                            />
-
                             <Label htmlFor="clinica" className="block text-sm font-medium leading-6 text-gray-900">
                                 Clínica
                             </Label>
@@ -305,11 +280,10 @@ export default function Example() {
                             onClick={handleSignUp}
                             className="flex w-full justify-center rounded-md bg-green-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
                         >
-                            Criar Conta
+                            Cadastrar Coordenador
                         </Button>
                     </form>
                 </CardContent>
-            </Card>
         </main>
       </div>
     </>
