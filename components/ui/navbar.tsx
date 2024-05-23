@@ -8,26 +8,26 @@ const user = {
   imageUrl:
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
-const navigation = [
-  { name: 'Consulta', href: '#', current: true },
-  { name: 'outras clinicas', href: '#', current: false },
-  //{ name: 'Projects', href: '#', current: false },
-  { name: 'Calendario', href: '#', current: false },
-  { name: 'Sobre nós', href: '#', current: false },
-]
 const userNavigation = [
   { name: 'Seu perfil', href: '#' },
   { name: 'Configuraçãoes', href: '#' },
   { name: 'Sair', href: '#' },
 ]
 
-function classNames(...classes) {
+
+const navigation = [
+  { name: 'Dashboard', href: '#', current: false },
+  { name: 'Clínicas', href: '#', current: false },
+  { name: 'Consultas', href: '#', current: false },
+  { name: 'Cadastros', href: '#', current: false },
+]
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Navbar() {
     return (
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-gray-900">
               {({ open }) => (
                 <>
                   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

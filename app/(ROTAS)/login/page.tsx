@@ -74,17 +74,15 @@ export default function Login() {
                         <HiOutlineUserCircle size={200} className="text-blue-400 mx-auto" />
 
                         <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+
                             Entrar na sua conta
                         </h2>
                     </div>
 
                     <form className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6">
                         <section>
-                            <Label
-                                htmlFor="username"
-                                className="block text-sm font-medium leading-6 text-gray-900"
-                            >
-                                Email ou Matrícula
+                            <Label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                                Email
                             </Label>
 
                             <Input
@@ -138,7 +136,6 @@ export default function Login() {
                         </span>
                     </form>
                 </CardContent>
-            </Card>
         </main>
     );
 }
