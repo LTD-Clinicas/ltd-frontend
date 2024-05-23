@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import { Calendar } from "@/components/ui/calendar"
 import  Navbar  from "@/components/ui/navbar"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { AiOutlineExclamationCircle } from "react-icons/ai";
+
 
 const user = {
   name: 'user',
@@ -32,29 +35,34 @@ export default function Example() {
   const originalConsultationText = "Marque o dia e o mês no calendario que deseja realizar a sua consulta!";
   const [turno, setTurno] = useState("");
   const [horario, setHorario] = useState("");
-  const [observacao, setObservacao] = useState("");
   const [isConsultationMarked, setIsConsultationMarked] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleConsultationClick = () => {
     if (!date) {
-      alert("Por favor, selecione uma data.");
+      setAlertMessage("Por favor, selecione uma data.");
+      setShowAlert(true);
       return;
     }
 
     const dayOfWeek = date.getDay();
     if (dayOfWeek === 0 || dayOfWeek === 6) {
-      alert("Consultas não podem ser marcadas aos sábados e domingos.");
+      setAlertMessage("Consultas não podem ser marcadas aos sábados e domingos.");
+      setShowAlert(true);
       return;
     }
 
     if (turno && horario) {
       const formattedDate = `${date.getDate()} do mês ${date.toLocaleString('default', { month: 'long' })}`;
-      const alertMessage = `Sua consulta foi marcada para o dia ${formattedDate} às ${horario} horas!`;
-      alert(alertMessage);
+      const alertMsg = `Sua consulta foi marcada para o dia ${formattedDate} às ${horario} horas!`;
+      setAlertMessage(alertMsg);
+      setShowAlert(true);
       setIsConsultationMarked(true);
       setConsultationText(`Sua consulta foi marcada para o dia ${formattedDate} às ${horario} horas ${turno}! Por favor, compareça no dia marcado.`);
     } else {
-      alert("Por favor, selecione todos os campos antes de marcar a consulta.");
+       setAlertMessage("Por favor, selecione todos os campos antes de marcar a consulta.");
+       setShowAlert(true);
     }
   };
 
@@ -62,7 +70,6 @@ export default function Example() {
     setIsConsultationMarked(false);
     setTurno("");
     setHorario("");
-    setObservacao("");
     setConsultationText(originalConsultationText);
   };
 
@@ -74,9 +81,7 @@ export default function Example() {
     setHorario(event.target.value);
   };
 
-  const handleObservationChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setObservacao(event.target.value);
-  };
+  
   
   return (
     <>
@@ -89,6 +94,15 @@ export default function Example() {
         </header>
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+            {showAlert && (
+              <Alert>
+                  <AiOutlineExclamationCircle className="h-4 w-4" />
+                  <AlertTitle>Alerta!</AlertTitle>
+                  <AlertDescription>
+                    {alertMessage}
+                  </AlertDescription>
+              </Alert>
+             )}
             {!isConsultationMarked ? (
               <div className="flex items-center space-x-4">
                 <div>
@@ -152,19 +166,6 @@ export default function Example() {
                            </>
                         )}
                       </select>
-                    </div>
-                    <div>
-                      <label htmlFor="observacao" className="block text-sm font-medium text-gray-700">
-                        Observação
-                      </label>
-                      <textarea
-                        id="observacao"
-                        name="observacao"
-                        rows={3}
-                        value={observacao}
-                        onChange={handleObservationChange}
-                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
-                      ></textarea>
                     </div>
                   </div>
                 </div>
