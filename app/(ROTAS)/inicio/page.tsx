@@ -4,7 +4,7 @@ import {
 
 import {
     NavBar
-} from "@/components/navigation/nav";
+} from "@/components/ui/navigation/navbar";
 
 export default function Inicio() {
     return (
