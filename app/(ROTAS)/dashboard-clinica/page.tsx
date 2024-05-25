@@ -37,7 +37,7 @@ export default function MarcarConsulta() {
 
     if (turno && horario) {
       const formattedDate = `${date.getDate()} do mês ${date.toLocaleString('default', { month: 'long' })}`;
-      const alertMsg = `Sua consulta foi marcada para o dia ${formattedDate} às ${horario} horas ${turno}! Por favor, compareça no dia marcado.`;
+      const alertMsg = `Sua consulta foi marcada para o dia ${formattedDate}, às ${horario} horas ${turno}! Por favor, compareça no dia marcado.`;
       setAlertMessage(alertMsg);
       setShowAlert(true);
       setIsConsultationMarked(true);
