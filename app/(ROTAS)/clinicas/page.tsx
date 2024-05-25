@@ -7,7 +7,7 @@ export default function Clinicas () {
         <div>
             <Navbar/>
             
-            <div className={"flex"}>
+            <div className={"flex justify-center"}>
                 <ClinicasList/>
             </div>
         </div>

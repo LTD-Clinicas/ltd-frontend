@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import {Label} from "@/components/ui/label";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
@@ -22,4 +23,42 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 )
 Input.displayName = "Input"
 
-export { Input }
+const InputComLabel = ({
+                            label,
+                            placeholder,
+                            register,
+                            classNameLabel = "",
+                            required = false,
+                            classNameInput,
+                            type
+                       }: {
+                            label:string
+                            placeholder?:string
+                            register:any
+                            classNameLabel?:string
+                            required?:boolean
+                            classNameInput?:string
+                            type?:string
+                        }) => {
+    
+    const isRequired = required ? ` after:content-["*"] after:text-red-500 after:font-bold` : ""
+    
+    return (
+        <div>
+            <Label
+                className={classNameLabel + isRequired}
+            >
+                {label}
+            </Label>
+
+            <Input
+                className={classNameInput}
+                placeholder={placeholder}
+                type={type}
+                {...register}
+            />
+        </div>
+    )
+}
+
+export { Input, InputComLabel }

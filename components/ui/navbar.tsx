@@ -19,7 +19,7 @@ const navigation = [
     { name: 'Dashboard', href: '/dashboard-clinica', current: false },
     { name: 'Clínicas', href: '/clinicas', current: false },
     { name: 'Consultas', href: '/marcar-consulta', current: false },
-    { name: 'Cadastros', href: '/cadastro/clinica', current: false },
+    { name: 'Cadastros', href: '/cadastro/roles', current: false },
 ]
 
 function classNames(...classes: string[]) {
@@ -28,7 +28,7 @@ function classNames(...classes: string[]) {
 
 export default function Navbar() {
     return (
-        <Disclosure as="nav" className="bg-gray-900">
+        <Disclosure as="nav" className="bg-blue-500">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -50,7 +50,7 @@ export default function Navbar() {
                                                 className={classNames(
                                                     item.current
                                                         ? 'bg-gray-900 text-white'
-                                                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                        : 'text-white hover:bg-blue-700 hover:text-white',
                                                     'rounded-md px-3 py-2 text-sm font-medium'
                                                 )}
                                                 aria-current={item.current ? 'page' : undefined}
@@ -63,15 +63,6 @@ export default function Navbar() {
                             </div>
                             <div className="hidden md:block">
                                 <div className="ml-4 flex items-center md:ml-6">
-                                    <button
-                                        type="button"
-                                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                    >
-                                        <span className="absolute -inset-1.5" />
-                                        <span className="sr-only">View notifications</span>
-                                        <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                    </button>
-
                                     {/* Profile dropdown */}
                                     <Menu as="div" className="relative ml-3">
                                         <div>
