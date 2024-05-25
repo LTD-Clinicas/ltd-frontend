@@ -4,6 +4,14 @@ import { Calendar } from "@/components/ui/calendar";
 import Navbar from "@/components/ui/navbar";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 const user = {
   name: 'user',
@@ -30,7 +38,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Example() {
+export default function MarcarConsulta() {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [turno, setTurno] = useState("");
   const [horario, setHorario] = useState("");
@@ -108,79 +116,84 @@ export default function Example() {
                   className="rounded-md border"
                 />
               </div>
-              <div>
-                <p className="ml-16 text-lg font-medium">
-                  Marque o dia e o mês no calendário que deseja realizar a sua consulta!
-                </p>
-                <div className="mt-4 space-y-4">
-                  <div>
-                    <label htmlFor="turno" className="block text-sm font-medium text-gray-700">
-                      Turno
-                    </label>
-                    <select
-                      id="turno"
-                      name="turno"
-                      onChange={handleTurnoChange}
-                      value={turno}
-                      className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
-                    >
-                      <option value="">Selecione o turno</option>
-                      <option value="Manhã">Manhã</option>
-                      <option value="Tarde">Tarde</option>
-                      <option value="Noite">Noite</option>
-                    </select>
+              <Card className="flex-1">
+                <CardHeader>
+                  <CardTitle>Marcar Consulta</CardTitle>
+                  <CardDescription>
+                    Marque o dia e o mês no calendário que deseja realizar a sua consulta!
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div>
+                      <label htmlFor="turno" className="block text-sm font-medium text-gray-700">
+                        Turno
+                      </label>
+                      <select
+                        id="turno"
+                        name="turno"
+                        onChange={handleTurnoChange}
+                        value={turno}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                      >
+                        <option value="">Selecione o turno</option>
+                        <option value="Manhã">Manhã</option>
+                        <option value="Tarde">Tarde</option>
+                        <option value="Noite">Noite</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="horario" className="block text-sm font-medium text-gray-700">
+                        Horário
+                      </label>
+                      <select
+                        id="horario"
+                        name="horario"
+                        onChange={handleHorarioChange}
+                        value={horario}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                      >
+                        <option value="">Selecione o horário</option>
+                        {turno === "Manhã" && (
+                          <>
+                            <option value="8:00">8:00 às 9:00 / 40 vagas</option>
+                            <option value="10:00">10:00 às 11:00 / 40 vagas</option>
+                          </>
+                        )}
+                        {turno === "Tarde" && (
+                          <>
+                            <option value="14:00">14:00 às 15:00 / 40 vagas</option>
+                            <option value="16:00">16:00 às 17:00 / 40 vagas</option>
+                          </>
+                        )}
+                        {turno === "Noite" && (
+                          <>
+                            <option value="18:00">18:00 às 19:00 / 40 vagas</option>
+                            <option value="20:00">20:00 às 21:00 / 40 vagas</option>
+                          </>
+                        )}
+                      </select>
+                    </div>
                   </div>
-                  <div>
-                    <label htmlFor="horario" className="block text-sm font-medium text-gray-700">
-                      Horário
-                    </label>
-                    <select
-                      id="horario"
-                      name="horario"
-                      onChange={handleHorarioChange}
-                      value={horario}
-                      className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                </CardContent>
+                <CardFooter className="flex justify-center space-x-4">
+                  {!isConsultationMarked ? (
+                    <button
+                      className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                      onClick={handleConsultationClick}
                     >
-                      <option value="">Selecione o horário</option>
-                      {turno === "Manhã" && (
-                        <>
-                          <option value="8:00">8:00 às 9:00 / 40 vagas</option>
-                          <option value="10:00">10:00 às 11:00 / 40 vagas</option>
-                        </>
-                      )}
-                      {turno === "Tarde" && (
-                        <>
-                          <option value="14:00">14:00 às 15:00 / 40 vagas</option>
-                          <option value="16:00">16:00 às 17:00 / 40 vagas</option>
-                        </>
-                      )}
-                      {turno === "Noite" && (
-                        <>
-                          <option value="18:00">18:00 às 19:00 / 40 vagas</option>
-                          <option value="20:00">20:00 às 21:00 / 40 vagas</option>
-                        </>
-                      )}
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="mt-4 flex justify-center space-x-4">
-              {!isConsultationMarked ? (
-                <button
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                  onClick={handleConsultationClick}
-                >
-                  Marcar Consulta
-                </button>
-              ) : (
-                <button
-                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                  onClick={handleUndoConsultationClick}
-                >
-                  Desfazer consulta
-                </button>
-              )}
+                      Marcar Consulta
+                    </button>
+                  ) : (
+                    <button
+                      className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                      onClick={handleUndoConsultationClick}
+                    >
+                      Desfazer consulta
+                    </button>
+                  )}
+                </CardFooter>
+              </Card>
             </div>
           </div>
         </main>
