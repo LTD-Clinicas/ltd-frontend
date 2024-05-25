@@ -33,36 +33,27 @@ export default function Login() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
-
-    const BASE_URL = 'http://18.206.68.106:8080/home';
 
     const handleLogin = async () => {
-
-        // setLoading(true);
-
         try {
-            const response = await fetch(`${BASE_URL}/login`, {
-                method: 'POST',
+            const response = await fetch(`${process.env.NEXT_PUPLIC_BASE_URL}/login`, {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    username: username,
-                    password: password,
-                }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Erro ao fazer login');
+                    username: username, 
+                    password: password
+                })
+            })
+            
+            if (response.ok) {
+                router.push("/dashboard-clinica")
+            } else {
+                alert("Usuário nao encontrado, tente novamente")
             }
-
-            router.push("/inicio")
-            // setLoading(!loading)
-
         } catch (error) {
-            console.error('Erro ao fazer login:', error);
-            throw error;
+            alert("Usuario nao encontrado, tente novamente")
         }
     }
 
@@ -74,7 +65,6 @@ export default function Login() {
                         <HiOutlineUserCircle size={200} className="text-blue-400 mx-auto" />
 
                         <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-
                             Entrar na sua conta
                         </h2>
                     </div>
@@ -100,12 +90,6 @@ export default function Login() {
                                 className="mt-4 flex items-center justify-between text-sm font-medium leading-6 text-gray-900"
                             >
                                 Senha
-                                <a
-                                    href="#"
-                                    className="text-sm font-semibold text-blue-400 hover:text-blue-500"
-                                >
-                                    Esqueceu sua senha?
-                                </a>
                             </Label>
 
                             <Input
@@ -136,6 +120,7 @@ export default function Login() {
                         </span>
                     </form>
                 </CardContent>
+            </Card>
         </main>
     );
 }
