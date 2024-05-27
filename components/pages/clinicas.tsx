@@ -8,12 +8,16 @@ import {
 } from "@/components/ui/card";
 
 import {
-    useMemo,
     useEffect,
     useState
 } from "react";
 
+import {
+    useRouter
+} from "next/navigation";
+
 const ClinicasList = () => {
+    const router = useRouter()
     const [arrClinicas, setArrClinicas] = useState([]);    
 
     useEffect(() => {
@@ -43,7 +47,10 @@ const ClinicasList = () => {
                 return (
                     <Card
                         key={id}
-                        className="h-40 sm:h-48 md:h-64 w-full sm:w-48 md:w-64"
+                        className="h-40 sm:h-48 md:h-64 w-full sm:w-48 md:w-64 hover:cursor-pointer bg-gray-50 drop-shadow-lg hover:bg-gray-100 transition-all"
+                        onClick={() => {
+                            router.push(`/clinicas/${id}`)
+                        }}
                     >
                         <CardHeader>
                             <CardTitle>
