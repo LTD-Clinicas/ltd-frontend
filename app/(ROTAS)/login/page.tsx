@@ -28,6 +28,12 @@ import {
     useRouter
 } from "next/navigation"
 
+import { 
+    parseCookies, 
+    setCookie, 
+    destroyCookie
+} from 'nookies'
+
 export default function Login() {
     const router = useRouter()
 
@@ -35,6 +41,7 @@ export default function Login() {
     const [password, setPassword] = useState("");
 
     const handleLogin = async () => {
+        const cookies = parseCookies()
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/login`, {
                 method: "POST",
@@ -45,13 +52,16 @@ export default function Login() {
                     username: username, 
                     password: password
                 })
-            })
-            
-            if (response.ok) {
+            }).then(data => {
+                return data.json()
+            }).then(data => {
+                setCookie(undefined, 'token', data.token, {
+                    maxAge: 60 * 60 * 12
+                })
                 router.push("/dashboard-clinica")
-            } else {
+            }).catch(error => {
                 alert("Usuário nao encontrado, tente novamente")
-            }
+            })
         } catch (error) {
             alert("Usuario nao encontrado, tente novamente")
         }

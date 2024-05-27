@@ -29,7 +29,9 @@ const ClinicasList = () => {
                     }
                     return await response.json()
                 })
-                .then(data => setArrClinicas(data))
+                .then(data => {
+                    setArrClinicas(data)
+                })
                 .catch(error => {
                     console.error(error)
                 })

@@ -20,7 +20,7 @@ export default function MarcarConsulta() {
     const [isConsultationMarked, setIsConsultationMarked] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
-
+    
     const handleConsultationClick = () => {
         if (!date) {
             setAlertMessage("Por favor, selecione uma data.");
