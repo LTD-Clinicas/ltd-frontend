@@ -1,43 +1,42 @@
 "use client"
 import Navbar from "@/components/ui/navbar";
-import { useParams } from "next/navigation"
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
 import {parseCookies} from "nookies";
 
-export default function Clinica () {
-    const params = useParams()
+export default function Clinica({
+                                    params,
+                                }: Readonly<{ params: { ID: string } }>) {
     const { ID } = params;
-    const [ arrClinicas, setArrClinicas ] = useState({
-        nome: '',
-        descricao: '',
-        quantidadeMax: '',
-        inicio: '',
-        fim: '',
-        inicio2: '',
-        fim2: '',
-        diasAtendimento: '',
-        maxPorHorario: ''
-    })
-
+    const [arrClinicas, setArrClinicas] = useState({
+        nome: "",
+        descricao: "",
+        quantidadeMax: "",
+        inicio: "",
+        fim: "",
+        inicio2: "",
+        fim2: "",
+        diasAtendimento: "",
+        maxPorHorario: "",
+    });
+    
     const {'token': token} = parseCookies();
     
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/clinica/${ID}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then(
-            async response => {
-                if (!response.ok) {
-                    console.error("Erro na requisição")
-                }
-                return await response.json()})
-            .then(data => {
-                setArrClinicas(data)
-            }).catch(error => {
-                console.error(error)
-            })
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/clinica/${ID}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(async response => {
+        if (!response.ok) {
+            console.error("Erro na requisição")
+        }
+    return await response.json()})
+    .then(data => {
+        setArrClinicas(data)
+    }).catch(error => {
+        console.error(error)
+    })
     
     return (
         <main>
@@ -79,7 +78,6 @@ export default function Clinica () {
                                     Máximo de pacientes por turno: <span className={"text-blue-500"}>{arrClinicas.quantidadeMax}</span>
                                 </p>
                             </div>
-                            
                         </div>
                     </CardContent>
                 </Card>

@@ -58,7 +58,7 @@ export default function Login() {
                 setCookie(undefined, 'token', data.token, {
                     maxAge: 60 * 60 * 12
                 })
-                router.push("/dashboard-clinica")
+                router.push("/clinicas")
             }).catch(error => {
                 alert("Usuário nao encontrado, tente novamente")
             })
