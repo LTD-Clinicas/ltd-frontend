@@ -30,15 +30,19 @@ const InputComLabel = ({
                             classNameLabel = "",
                             required = false,
                             classNameInput,
-                            type
+                            type,
+                            value,
+                            disabled = false,
                        }: {
                             label:string
                             placeholder?:string
-                            register:any
+                            register?:any
                             classNameLabel?:string
                             required?:boolean
                             classNameInput?:string
                             type?:string
+                            value?: undefined | number | any
+                            disabled?: boolean
                         }) => {
     
     const isRequired = required ? ` after:content-["*"] after:text-red-500 after:font-bold` : ""
@@ -55,6 +59,8 @@ const InputComLabel = ({
                 className={classNameInput}
                 placeholder={placeholder}
                 type={type}
+                value={value}
+                disabled={disabled}
                 {...register}
             />
         </div>

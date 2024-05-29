@@ -18,7 +18,6 @@ const userNavigation = [
 const navigation = [
     // { name: 'Dashboard', href: '/dashboard-clinica', current: false },
     { name: 'Clínicas', href: '/clinicas', current: false },
-    { name: 'Consultas', href: '/marcar-consulta', current: false },
     { name: 'Cadastros', href: '/cadastro/roles', current: false },
     { name: 'Consultas Marcadas', href: '/consultas-marcadas', current: false },
 ]

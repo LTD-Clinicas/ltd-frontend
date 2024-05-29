@@ -16,6 +16,9 @@ import {
     useRouter
 } from "next/navigation";
 
+import { GrAction  } from "react-icons/gr";
+import { FaBookOpen, FaAppleAlt, FaHeadSideVirus } from "react-icons/fa";
+
 const ClinicasList = () => {
     const router = useRouter()
     const [arrClinicas, setArrClinicas] = useState([]);    
@@ -39,6 +42,13 @@ const ClinicasList = () => {
         getClinicas()
     },[arrClinicas])
     
+    const icones = {
+        "icone1": <FaBookOpen className={"mx-auto text-blue-500 hover:text-blue-800"} size={100}/>,
+        "icone2": <GrAction className={"mx-auto text-blue-500 hover:text-blue-800"} size={100}/>,
+        "icone3": <FaAppleAlt className={"mx-auto text-blue-500 hover:text-blue-800"} size={100}/>,
+        "icone4": <FaHeadSideVirus className={"mx-auto text-blue-500 hover:text-blue-800"} size={100}/>,
+    }
+    
     return (
         <div
             className="mt-10 h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6"
@@ -55,13 +65,13 @@ const ClinicasList = () => {
                         }}
                     >
                         <CardHeader>
-                            <CardTitle>
-                                <p>{nome}</p>
+                            <CardTitle className={"text-center"}>
+                                <p className={"text-blue-500 hover:text-blue-800"}>{nome}</p>
                             </CardTitle>
                         </CardHeader>
 
-                        <CardContent>
-                            <p>{descricao}</p>
+                        <CardContent className={"text-center"}>
+                            {icones[descricao]}
                         </CardContent>
                     </Card>
                 )
