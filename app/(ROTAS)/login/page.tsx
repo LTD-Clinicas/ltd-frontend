@@ -69,7 +69,7 @@ export default function Login() {
 
     return (
         <main className={"h-screen w-full p-12"}>
-            <Card className="h-fit w-fit px-0 md:px-16 pt-3 mx-auto">
+            <Card className="h-fit w-fit px-0 md:px-16 pt-3 mx-auto shadow-2xl">
                 <CardContent>
                     <div className="">
                         <HiOutlineUserCircle size={200} className="text-blue-400 mx-auto" />
@@ -125,7 +125,7 @@ export default function Login() {
                             Não tem cadastro?
                             
                             <a href="#" className="font-semibold leading-6 text-blue-400 hover:text-indigo-500">
-                                Clique aqui
+                                Entre em contato
                             </a>
                         </span>
                     </form>

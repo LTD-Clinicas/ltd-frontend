@@ -39,24 +39,23 @@ export default function MarcarConsulta({ params }: Readonly<{ params: { ID: stri
     } = useForm({defaultValues:{
             dia: new Date().toLocaleDateString("en-ZA"),
             clinica: "",
-            nome: "",
             info: "",
             horaInicio: "",
             horaFim: ""
         }});
     const [date, setDate] = useState<Date | undefined>(new Date());
-    const [showAlert, setShowAlert] = useState(false);
     const [turno, setTurno] = useState("")
     const { ID } = params;
     const {'token': token} = parseCookies();
     const [arrClinicas, setArrClinicas] = useState({
-        id: "",
+        id: 0,
         inicio: "",
         fim: "",
         inicio2: "",
         fim2: "",
         quantidadeMax: "",
-        maxPorHorario: ""
+        maxPorHorario: "",
+        dia: ""
     });
     
     const listaHorarios: {[x: string]: string[]} = {
@@ -98,27 +97,32 @@ export default function MarcarConsulta({ params }: Readonly<{ params: { ID: stri
         });
     }, [token]);
     
-    const onSubmit = (data: any) => {
+    const onSubmit = async (data: any) => {
         data.horaFim = data.horaInicio
+        data.clinica = Number(data.clinica)
+        data.dia = data.dia.replaceAll("/", "-")
         console.log(data)
         
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/consulta/salvar`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/consulta/salvar`,{
             method: "POST",
-            body: JSON.stringify(data),
-        }).then(async (response) => {
-            console.log(response)
-        }).catch(error => {
-            alert("Erro ao realizar a requisição")
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify(data)
+        }).then((response) => {
+            if (response.ok) {
+                alert(`Consulta agendada com sucesso para o dia ${data.dia}`)
+            }    
+        }).catch((error) => {
+            alert("Ocorreu um erro inesperado")
         })
     }
-
+    
     useEffect(() => {
         setValue("clinica", ID)
     }, [ID])
-    // @ts-ignore
+    
     return (
         <>
             <div className="min-h-full">

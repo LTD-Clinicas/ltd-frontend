@@ -18,10 +18,13 @@ import {
 
 import { GrAction  } from "react-icons/gr";
 import { FaBookOpen, FaAppleAlt, FaHeadSideVirus } from "react-icons/fa";
+import { MdSportsHandball } from "react-icons/md";
+import { parseCookies } from "nookies";
 
-const ClinicasList = () => {
+const   ClinicasList = () => {
     const router = useRouter()
-    const [arrClinicas, setArrClinicas] = useState([]);    
+    const [arrClinicas, setArrClinicas] = useState([]);
+    const {'token': token} = parseCookies();
 
     useEffect(() => {
         const getClinicas = async () => {
@@ -40,18 +43,18 @@ const ClinicasList = () => {
                 })
         }
         getClinicas()
-    },[arrClinicas])
+    },[token])
     
     const icones = {
-        "icone1": <FaBookOpen className={"mx-auto text-blue-500 hover:text-blue-800"} size={100}/>,
-        "icone2": <GrAction className={"mx-auto text-blue-500 hover:text-blue-800"} size={100}/>,
-        "icone3": <FaAppleAlt className={"mx-auto text-blue-500 hover:text-blue-800"} size={100}/>,
-        "icone4": <FaHeadSideVirus className={"mx-auto text-blue-500 hover:text-blue-800"} size={100}/>,
+        "icone1": <FaBookOpen className={"mx-auto text-blue-500 hover:text-blue-800"} size={65}/>,
+        "icone2": <MdSportsHandball className={"mx-auto text-blue-500 hover:text-blue-800"} size={65}/>,
+        "icone3": <FaAppleAlt className={"mx-auto text-blue-500 hover:text-blue-800"} size={65}/>,
+        "icone4": <FaHeadSideVirus className={"mx-auto text-blue-500 hover:text-blue-800"} size={65}/>,
     }
     
     return (
         <div
-            className="mt-10 h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6"
+            className="mt-10 h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
         >
             {arrClinicas?.map(({
                 id, nome, descricao
@@ -59,7 +62,7 @@ const ClinicasList = () => {
                 return (
                     <Card
                         key={id}
-                        className="h-40 sm:h-48 md:h-64 w-full sm:w-48 md:w-64 hover:cursor-pointer bg-gray-50 drop-shadow-lg hover:bg-gray-100 transition-all"
+                        className="h-40 sm:h-48 md:h-40 w-full sm:w-48 md:w-40 hover:cursor-pointer bg-gray-50 drop-shadow-lg hover:bg-gray-100 transition-all"
                         onClick={() => {
                             router.push(`/clinicas/${id}`)
                         }}
