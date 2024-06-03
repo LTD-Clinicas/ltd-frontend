@@ -5,10 +5,12 @@ import { Card, CardContent } from "@/components/ui/card"
 import { useForm } from "react-hook-form"
 import Navbar from "@/components/ui/navbar"
 import { useRouter } from "next/navigation"
+import { parseCookies } from "nookies";
 
 export default function Coordenador () {
     const router = useRouter()
-
+    const {'token': token} = parseCookies();
+    
     const {
         register,
         handleSubmit
@@ -20,7 +22,8 @@ export default function Coordenador () {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/salvar/coordenador`, {
                 method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify(
                     data

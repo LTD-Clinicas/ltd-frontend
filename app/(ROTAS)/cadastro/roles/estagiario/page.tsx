@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card"
 import { useForm } from "react-hook-form"
 import Navbar from "@/components/ui/navbar"
 import { useRouter } from "next/navigation"
+import {parseCookies} from "nookies";
 
 export default function Estagiario () {
     const router = useRouter()
+    const {'token': token} = parseCookies();
     
     const { 
         register, 
@@ -20,7 +22,8 @@ export default function Estagiario () {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/salvar/estagiario`, {
                 method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(
                     data
