@@ -35,8 +35,8 @@ export default function Consultas () {
         <main>
             <Navbar/>
 
-            <div className={"flex justify-center p-12"}>
-                <Card className={"mt-8 p-8 w-full text-center"}>
+            <div className={"flex justify-center w-3/5 mx-auto"}>
+                <Card className={"shadow-2xl mt-8 p-8 w-full text-center"}>
                     <CardTitle className={"font-bold text-blue-500"}>
                         Consultas agendadas no sistema
                     </CardTitle>
@@ -57,25 +57,23 @@ export default function Consultas () {
                             info?: undefined | string
                         }) => {
                             return (
-                                <Card key={id} className={"mt-4 p-1 shadow-2xl"}>
+                                <Card key={id} className={"mt-4 p-1 bg-gray-50"}>
                                     <CardContent>
                                         <h3 className={"font-bold text-blue-500 text-xl"}>
-                                            Teste
+                                            Consulta dia: {dia}
                                         </h3>
-                                        <div>
-                                            <p>Informações sobre a consulta </p>
-                                            
-                                            <div className={"flex justify-between"}>
+                                        <div className={"text-left"}>
+                                            <div className={"flex flex-col justify-between"}>
                                                 <p><span className={"font-semibold text-blue-500"}>Paciente</span>: {paciente}</p>
                                                 <p><span className={"font-semibold text-blue-500"}>Funcionário responsável</span>: {funcionario}</p>
                                             </div>
                                             
-                                            <p><span className={"font-semibold text-blue-500"}>Clinica</span>: {}</p>
+                                            <p><span className={"font-bold text-blue-500"}>Clinica</span>: {clinica?.nome}</p>
 
-                                            <div>
+                                            <div className={"flex gap-1"}>
                                                 <p><span className={"font-semibold text-blue-500"}>Informações adicionais</span>: </p>
                                                 
-                                                <p></p>
+                                                <p>{info}</p>
                                             </div>
                                         </div>
                                     </CardContent>

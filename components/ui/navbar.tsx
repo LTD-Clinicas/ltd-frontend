@@ -10,9 +10,7 @@ const user = {
 }
 
 const userNavigation = [
-    { name: 'Seu perfil', href: '#' },
-    { name: 'Configuraçãoes', href: '#' },
-    { name: 'Sair', href: '#' },
+    { name: 'Sair', href: '/login' }
 ]
 
 const navigation = [

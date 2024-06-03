@@ -13,11 +13,11 @@ export default function Cadastros () {
     const router  = useRouter()
     
     return (
-        <div>
+        <main>
             <Navbar/>
-            <div className={"flex items-center justify-center gap-4 mt-16"}>
+            <div className={"flex flex-col p-12 items-center justify-between gap-4 mt-16 "}>
                 <Button
-                    className={"h-32 text-xl !bg-blue-500 hover:!bg-blue-800"}
+                    className={"h-32 w-64 text-xl !bg-blue-500 hover:!bg-blue-800"}
                     onClick={() => {
                         router.push("/cadastro/roles/coordenador")
                     }}
@@ -26,7 +26,7 @@ export default function Cadastros () {
                 </Button>
                 
                 <Button
-                    className={"h-32 text-xl !bg-blue-500 hover:!bg-blue-800"}
+                    className={"h-32 w-64 text-xl !bg-blue-500 hover:!bg-blue-800"}
                     onClick={() => {
                         router.push("/cadastro/roles/estagiario")
                     }}
@@ -35,7 +35,7 @@ export default function Cadastros () {
                 </Button>
                 
                 <Button
-                    className={"h-32 text-xl !bg-blue-500 hover:!bg-blue-800"}
+                    className={"h-32 w-64 text-xl !bg-blue-500 hover:!bg-blue-800"}
                     onClick={() => {
                         router.push("/cadastro/roles/paciente")
                     }}
@@ -43,6 +43,6 @@ export default function Cadastros () {
                     Cadastrar Paciente
                 </Button>
             </div>
-        </div>
+        </main>
     )
 } 
